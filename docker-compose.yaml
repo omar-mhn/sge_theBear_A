@@ -1,0 +1,27 @@
+version: '3.1'
+services:
+  db:
+    image: postgres:13 # Estos son los datos con los que se creara la base de datos de PostgresSQL
+    container_name: db
+    environment:
+      POSTGRES_USER: maria
+      POSTGRES_PASSWORD: maria2003
+      POSTGRES_DB: base
+    ports:
+      - "5432:5432" # Este es el puerto en el que esta Postgres
+    volumes:
+      - local_pgdata:/var/lib/postgresql/data
+  pgadmin: # PgAdmin es donde crearemos la base de datos y sus tablas
+    image: dpage/pgadmin4
+    container_name: pgadmin11
+    ports:
+      - "80:80"
+    environment: # Y estas son las credenciales para acceder a PgAdmin
+      PGADMIN_DEFAULT_EMAIL: 2023_maria.palomeque@iticbcn.cat
+      PGADMIN_DEFAULT_PASSWORD: maria2003
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+
+volumes:
+  local_pgdata:
+  pgadmin-data:
