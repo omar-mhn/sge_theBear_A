@@ -1,8 +1,8 @@
-import psycpg2
+import psycopg2
 
 def connection_db():
     conn = psycopg2.connect(
-        database="the bear",
+        database="the_bear",
         password="admin",
         user="admin",
         host="localhost",
