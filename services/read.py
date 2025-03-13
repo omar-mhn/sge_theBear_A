@@ -1,4 +1,13 @@
 from schema import read_sch
+from sqlmodel import  Session, select
+from models.User import User
+
+def get_all_users(db:Session):
+    sql_read = select(User)
+    users = db.exec(sql_read).all()
+    return read_sch(users)
+
+
 
 def registre():
     users = {
