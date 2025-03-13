@@ -7,10 +7,10 @@ import os
 
 app = FastAPI()
 
-@app.get("/root", response_model=List[dict])
+'''@app.get("/root", response_model=List[dict])
 async def read_root():
     result = read.registre()
-    return result
+    return result'''
 
 #1 Carregar variables d'entorn
 load_dotenv()

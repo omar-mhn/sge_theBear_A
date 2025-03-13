@@ -8,3 +8,7 @@ def schema(usr) -> dict:
 
 def schemas(users) -> list[dict]:
     return [schema(user) for k,user in users.items()]
+
+def users_schema(users)-> list[dict]:
+    response = [schema(user) for user in users]
+    return response
