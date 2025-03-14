@@ -17,4 +17,4 @@ def add_new_user(name: str, email:str, db:Session):
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
-    return {"Usuariio creado correctamente"} #TRANSFORMAR DICCCIONARIO
+    return {"message": "Usuario creado correctamente"} #DICCIONARIO CORRECTO 
