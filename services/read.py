@@ -7,6 +7,12 @@ def get_all_users(db:Session):
     users = db.exec(sql_read).all()
     return read_sch(users)
 
+def add_new_user(name: str, email: str, db:Session):
+    db_user = User(name=name, email=email)
+    db.add(db_read)
+    db.commit()
+    db.refresh(db_read)
+    return {"Created user succesfully"}
 
 
 def registre():
