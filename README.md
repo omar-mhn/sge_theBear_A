@@ -6,8 +6,8 @@
 ![Fastapi Swagger UI](Captura/Fastapi.png)
 
 ### - Fastapi + DB - 
-**És conceta a la base i amb la funció read_user i la comanda get lleix les dades que es troban a la base de dades de
-PostreSQL i podras obtenir-ne el usuaris hi són.**
+**És conceta a la base de dades de PostreSQL i amb la funció read_user i la comanda get lleix les dades que es troban
+a la base de dades de PostreSQL mostrant els usuaris que hi són.**
 
 ![Fastapi_read_user UI](Captura/FastapiReadUser.png)
 
