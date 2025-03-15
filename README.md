@@ -4,4 +4,4 @@
 
 # captura del endpoint 
 
-![endpoint](img.png)
+![endpoint](captura/SGE%20sdfer.png)
