@@ -7,7 +7,14 @@ def get_all_users(db:Session):
     users = db.exec(sql_read).all()
     return read_sch(users)
 
-def registre():
+def add_new_user(name:str, email:str, db:Session):
+    db_user = User(name=name, email=email)
+    db.add(db_user)
+    db.commit()
+    db.refresh(db_user)
+    return {"msg":"Cretated user succesfully"}
+
+'''def registre():
     users = {
         "user1":{
             "id":1,
@@ -28,4 +35,4 @@ def registre():
             "age": 40
         }
     }
-    return read_sch.schemas(users)
+    return read_sch.schemas(users)'''
