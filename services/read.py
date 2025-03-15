@@ -12,7 +12,7 @@ def add_new_user(name:str, email:str, db:Session):
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
-    return {"msg":"Cretated user succesfully"}
+    return {"msg":"Created user succesfully"}
 
 '''def registre():
     users = {
