@@ -1,18 +1,9 @@
-from schema import read_sch
-from sqlmodel import Session, select
+from schema.read_sch import users_schema
+from sqlmodel import  Session, select
 from models.User import User
 
-def get_all_users(db:Session):
-    sql_read = select(User)
-    users = db.exec(sql_read).all()
-    return read_sch(users)
 
-def add_new_user(name:str, email:str, db:Session):
-    db_user = User(name=name, email=email)
-    db.add(db_user)
-    db.commit()
-    db.refresh(db_user)
-    return {"msg":"Cretated user succesfully"}
+
 
 """def registre():
     users = {
