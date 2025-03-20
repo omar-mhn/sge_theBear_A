@@ -102,8 +102,33 @@ def create_user(name: str, email:str, db:Session = Depends(get_db)):
     result = user.add_new_user(name, email, db)
     return result*
 
+# 𝒜𝒸𝓉𝒾𝓋𝒾𝓉𝒶𝓉 - 𝒻𝒶𝓈𝓉𝒶𝓅𝒾 𝓊𝓅𝒹𝒶𝓉𝑒 𝒹𝑒𝓁𝑒𝓉𝑒
 
+## Update 
 
+Primero, ejecutamos el endpoint "read" para obtener la lista de usuarios existentes en la base de datos. Esto nos permite identificar el "id" del usuario que deseamos modificar.
 
+![alt text](image-11.png)
 
+En este caso, observamos que existen siete usuarios registrados. Seleccionaremos al usuario con id 4, cuyo nombre actual es maria, para realizar la actualización. Procederemos a modificar el parámetro nombre de "maria" a "antonia". Para efectuar este cambio, ejecutaremos el endpoint "update". 
 
+![alt text](image-13.png)
+
+Probaremos como funciona el sistema ante entradas inválidas, introduciremos un 'id' que no corresponde a ningún usuario existente. En este caso, probaremos con el 'id' 10. Al intentar actualizar un usuario con este 'id' inexistente, el sistema responderá con el siguiente mensaje: 
+
+![alt text](image-14.png)
+
+Para confirmar que la edición del usuario maria se ha guardado correctamente, realizaremos una nueva consulta al endpoint read. Esto nos permitirá verificar que el nombre del usuario con id 4 ha sido actualizado a antonia en la base de datos.
+
+![alt text](image-15.png)
+
+# Delete
+Para la eliminación de un usuario debemos identificar el id del usuario que se desea eliminar. Una vez obtenido, por ejemplo, el id 6, se procede a ejecutar el endpoint 'delete' enviando dicho 'id' como parámetro. 
+
+Al ejecutar este endpoint, el sistema realiza la eliminación del usuario correspondiente y responde con un mensaje de confirmación, asegurando que la acción se ha completado con éxito 
+
+![alt text](image-17.png)
+
+Finalmente, ejecutaremos nuevamente el endpoint 'read' para verificar la eliminación del usuario.
+
+![alt text](image-18.png)
