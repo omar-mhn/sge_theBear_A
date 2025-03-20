@@ -9,7 +9,7 @@
 **És conceta a la base de dades de PostreSQL i amb la funció read_user i la comanda get lleix les dades que es troban
 a la base de dades de PostreSQL mostrant els usuaris que hi són.**
 
-![Fastapi_read_user UI](Captura/FastapiReadUser.png)
+![Fastapi Swagger UI](Captura/Fastapi.png)
 
 **És conceta a la base de dades de PostgreSQL i crear els usuaris amb la funció create_user li afegirem el 
 diccionari que hi son básicament les dades del usuari**
