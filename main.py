@@ -1,6 +1,6 @@
 from typing import List
 from fastapi import FastAPI, Depends
-from services import read
+from services import read,user
 from sqlmodel import SQLModel, create_engine, Session
 from dotenv import load_dotenv
 import os
@@ -16,8 +16,8 @@ async def read_root():
 load_dotenv()
 
 #2. Configurar la connexio a postgreSQL
-DATABAASE_URL = os.getenv("DATABASE_URL") # Obtenir la URL de connexió de .env
-engine = create_engine(DATABAASE_URL)  # Crear l'engine de connexió
+DATABASE_URL = os.getenv("DATABASE_URL") # Obtenir la URL de connexió de .env
+engine = create_engine(DATABASE_URL)  # Crear l'engine de connexió
 
 #3. Crear les taules a la base de dades
 SQLModel.metadata.create_all(engine)
@@ -42,4 +42,7 @@ def create_user(name: str,email:str, db:Session = Depends(get_db)):
     result = read.add_new_user(name, email, db)
     return result
 
-
+@app.put("/users/", response_model=dict)
+async def update_id(name:str,db:Session = Depends(get_db)):
+    result = user.update_user(name,db)
+    return result
