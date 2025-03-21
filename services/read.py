@@ -19,6 +19,24 @@ def registre():
             "name":"Juan Manuel",
             "surname":"sanchez",
             "age":40
+        },
+        "user4":{
+            "id":4,
+            "name":"Juan Carlos",
+            "surname":"Garcia",
+            "age":30
+        },
+        "user5":{
+            "id":5,
+            "name":"Ken Ryuga",
+            "surname":"Kamau",
+            "age":22
+        },
+        "user6":{
+            "id":6,
+            "name":"Kyle",
+            "surname":"Kim",
+            "age":23
         }
     }
     return read_sch.schemas(users)
