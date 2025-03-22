@@ -27,3 +27,7 @@ les dades del usuari actualitzades i mostrant el missatge User updated.**
 **És conceta a la base de dades de PostgreSQL i esborra al usuari mitjançant l' id de 
 l'usuari gracies a la funció delete_user del fitxer main que crida a la funció 
 delete.user retornant un missatge que ens mostra: User deleted.**
+
+### Totes les opcions dels usuaris amb els endpoints 
+![Fastapi_tot_end_point](Captura/Fastapi_tot.png)
+
