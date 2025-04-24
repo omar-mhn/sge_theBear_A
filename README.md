@@ -4,5 +4,6 @@
 
 ![alt text](Fotografias/SGE_A.drawio.png)
 
-![SGE_A drawio](https://github.com/user-attachments/assets/d3840193-7548-4472-8479-6294e5eed9b5)
+![SGE_A drawio](https://github.com/user-attachments/assets/28cb7d6f-2a93-4678-8f7f-14036fa8894f)
+
 
