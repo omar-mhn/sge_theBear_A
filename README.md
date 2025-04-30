@@ -1,25 +1,11 @@
 # sge_theBear_A
 
-+ I had some problems executing uvicorn but at the end it all worked out. 
+![FastAPI Swagger UI](captura/fastApi.png)
 
-![structure](execution.png) 
-
-
-Database connection established.
-![dbCheck](dbCheck.png)
-
-GetUser
-![Get user](GetUser.png)
-
-Create users
-![user creation test](CreateUser.png)
-
-21/03/2025
-
-!Late commit, I had repository issues. (>.<)
-
-Update Users
-![User name update test](Update_user.png)
-
-Delete Users
-![Remove user test](Del_user.png)
+# project fastapi + bd
+### captura del endpoint
+![endpoint](captura/SGE%20sdfer.png)
+# Añadir user 
+![addUserSge.png](captura/addUserSge.png)
+# read user
+![Captura de pantalla de 2025-03-16 20-53-18.png](captura/Captura%20de%20pantalla%20de%202025-03-16%2020-53-18.png)
