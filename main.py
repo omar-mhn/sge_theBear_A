@@ -1,23 +1,14 @@
 import os
 from typing import List
-from fastapi import FastAPI, Depends, Body, HTTPException
+from fastapi import FastAPI, Depends
 from sqlmodel import SQLModel, create_engine, Session
 from dotenv import load_dotenv
-from services import user
-from services import read
-from services.user import update_user
+from services import empleat
 
 load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_URL")
 engine = create_engine(DATABASE_URL)
 SQLModel.metadata.create_all(engine)
-
-app = FastAPI()
-
-@app.get("/root", response_model=List[dict])
-async def read_root():
-    result = read.registre()
-    return result
 
 def get_db():
     db = Session(engine)
@@ -26,27 +17,25 @@ def get_db():
     finally:
         db.close()
 
-@app.get("/users", response_model= list[dict])
-def read_user(db:Session = Depends(get_db)):
-    result = user.get_all_users(db)
+app = FastAPI()
+
+@app.get("/empleats/", response_model= list[dict])
+async def read_empleat(db:Session = Depends(get_db)):
+    result = empleat.get_all_empleats(db)
     return result
 
-@app.post("/users", response_model=dict)
-def create_user(name: str, email:str, db:Session = Depends(get_db)):
-    result = user.add_new_user (name, email, db)
+@app.post("/empleats/", response_model=dict)
+async def create_empleat(empleatid:str, nom: str, email:str, telefon: str, adreca: str, rol: str, db:Session = Depends(get_db)):
+    result = empleat.add_new_empleat(empleatid, nom, email, telefon, adreca, rol, db)
     return result
 
-#Update user info
-@app.put("/update-user/{user_id}")
-def update_user_info(
-    user_id: int,
-    new_name: str,
-    db: Session = Depends(get_db)):
-    updated_user = user.update_user(user_id, new_name, db)
 
-    return {"message": "User updated successfully", "user_id": user_id, "new_name": new_name}
+@app.put("/update_empleat/", response_model=dict)
+async def update_empleat(empleatid:str, nom: str, email:str, telefon: str, adreca: str, rol: str, db:Session = Depends(get_db)):
+    result = empleat.update_empleat(empleatid, nom, email, telefon, adreca, rol, db)
+    return result
 
-@app.delete("/users/{user_id}")
-def delete_user(user_id: int, db: Session = Depends(get_db)):
-    deleted_user = user.delete_user(user_id, db)
-    return {"message": "User deleted successfully"}
+@app.delete("/empleats/", response_model=dict)
+async def delete_empleat(empleatid:str, db:Session = Depends(get_db)):
+    result = empleat.delete_empleat(empleatid, db)
+    return result

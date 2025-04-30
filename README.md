@@ -1,11 +1,10 @@
 # sge_theBear_A
 
-![FastAPI Swagger UI](captura/fastApi.png)
+## Diagrama entidad - relación 
 
-# project fastapi + bd
-### captura del endpoint
-![endpoint](captura/SGE%20sdfer.png)
-# Añadir user 
-![addUserSge.png](captura/addUserSge.png)
-# read user
-![Captura de pantalla de 2025-03-16 20-53-18.png](captura/Captura%20de%20pantalla%20de%202025-03-16%2020-53-18.png)
+![alt text](Fotografias/SGE_A.drawio.png)
+
+DEF
+![SGE_A_png drawio](https://github.com/user-attachments/assets/49930f95-97d0-4336-be0f-9db61d0a95c4)
+
+
