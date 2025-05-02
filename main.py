@@ -1,10 +1,10 @@
 import os
-from typing import List
-from fastapi import FastAPI, Depends
-from sqlmodel import SQLModel, create_engine, Session
 from dotenv import load_dotenv
-from services import client
+from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
+from sqlmodel import SQLModel, create_engine, Session
+
+from services import client
 
 load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_URL")
@@ -28,6 +28,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+#--------------------------------taula-Client--------------------------------------------------#
 @app.get("/clients/", response_model= list[dict])
 async def read_client(db:Session = Depends(get_db)):
     result = client.get_all_clients(db)
@@ -58,3 +59,4 @@ async def update_client_field(id_client: int, field: str, value: str, db: Sessio
 async def delete_client(id_client:int, db:Session = Depends(get_db)):
     result = client.delete_client(id_client, db)
     return result
+#-----------------------------final-taula-Client--------------------------------------------------#

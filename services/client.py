@@ -2,6 +2,7 @@ from schema.clients_sch import clients_schema
 from sqlmodel import Session, select
 from models.Client import Client
 
+#--------------------------------taula-Client--------------------------------------------------#
 def get_all_clients(db:Session):
     sql_read = select(Client)
     clients = db.exec(sql_read).all()
@@ -17,7 +18,7 @@ def add_new_client(id_client:int, nom: str, email:str, telefon: str, db:Session)
     db.add(db_client)
     db.commit()
     db.refresh(db_client)
-    return {"Message":"Created client successfully"}
+    return {"Missatge":"Client creat correctament"}
 
 def update_client(id_client:int, nom: str, email:str, telefon:str, db:Session):
     sql_select = select(Client).where(Client.id_client == id_client)
@@ -30,7 +31,7 @@ def update_client(id_client:int, nom: str, email:str, telefon:str, db:Session):
     db.add(client_db)
     db.commit()
     db.refresh(client_db)
-    return {"msg":"Client actualitzat correctament"}
+    return {"Missatge":"Client actualitzat correctament"}
 
 def update_client_field(id_client: int, data: dict, db: Session):
     sql_select = select(Client).where(Client.id_client == id_client)
@@ -46,7 +47,7 @@ def update_client_field(id_client: int, data: dict, db: Session):
     db.add(client_db)
     db.commit()
     db.refresh(client_db)
-    return {"msg": f"Camp(s) actualitzat(s) correctament"}
+    return {"Missatge": f"Camp(s) actualitzat(s) correctament"}
 
 def delete_client(id_client:int, db:Session):
     sql_select = select(Client).where(Client.id_client == id_client)
@@ -54,4 +55,5 @@ def delete_client(id_client:int, db:Session):
 
     db.delete(client_db)
     db.commit()
-    return {"Msg":"Empleat deleted successfully"}
+    return {"Missatge":"Empleat esborrat correctament"}
+#-----------------------------final-taula-Client--------------------------------------------------#
