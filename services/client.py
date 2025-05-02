@@ -56,4 +56,4 @@ def delete_client(id_client:int, db:Session):
     db.delete(client_db)
     db.commit()
     return {"Missatge":"Empleat esborrat correctament"}
-#-----------------------------final-taula-Client--------------------------------------------------#
+#-----------------------------final-taula-Client-------------------------------------------------#

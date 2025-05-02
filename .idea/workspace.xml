@@ -5,6 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ffc763c7-5dd7-4c50-a29e-8087569b3183" name="Changes" comment="estructura">
+      <change afterPath="$PROJECT_DIR$/models/Comanda.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/Planificacio.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/schema/comandes_sch.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/schema/planificacions_sch.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/comanda.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/planificacio.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/Client.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/Client.py" afterDir="false" />
