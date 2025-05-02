@@ -3,7 +3,7 @@ from typing import List
 from fastapi import FastAPI, Depends
 from sqlmodel import SQLModel, create_engine, Session
 from dotenv import load_dotenv
-from services import reunio, producte
+from services import reunio, producte,coste
 
 load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_URL")
@@ -65,4 +65,29 @@ async def update_producte(id_producte: str, cost: str, quantitat: str, nom_produ
 @app.delete("/productes/", response_model=dict)
 async def delete_producte(id_producte: str, db: Session = Depends(get_db)):
     result = producte.delete_producte(id_producte, db)
+    return result
+
+#----------- Coste
+
+@app.get("/costes/", response_model=List[dict])
+async def read_costes(db: Session = Depends(get_db)):
+    result = coste.get_all_costes(db)
+    return result
+
+
+@app.post("/costes/", response_model=dict)
+async def create_coste(id_factura: str, data: str, tipus_cost: str, cost_total: str, id_compra: str, id_empleat: str, id_comanda: str, db: Session = Depends(get_db)):
+    result = coste.add_new_coste(id_factura, data, tipus_cost, cost_total, id_compra, id_empleat, id_comanda, db)
+    return result
+
+
+@app.put("/update_coste/", response_model=dict)
+async def update_coste(id_factura: str, data: str, tipus_cost: str, cost_total: str, id_compra: str, id_empleat: str, id_comanda: str, db: Session = Depends(get_db)):
+    result = coste.update_coste(id_factura, data, tipus_cost, cost_total, id_compra, id_empleat, id_comanda, db)
+    return result
+
+
+@app.delete("/costes/", response_model=dict)
+async def delete_coste(id_factura: str, db: Session = Depends(get_db)):
+    result = coste.delete_coste(id_factura, db)
     return result

@@ -8,7 +8,7 @@ def get_all_productes(db: Session):
     return productes_schema(productes)
 
 def get_producte(id_producte: str, db: Session):
-    sql_read = select(Producte).where(Producte.id_producte == id_producte)
+    sql_read = select(id_producte).where(Producte.id_producte == id_producte)
     producte = db.exec(sql_read).one()
     return productes_schema([producte])
 
@@ -27,7 +27,7 @@ def add_new_producte(id_producte: str, cost: str, quantitat: str, nom_producte: 
     return {"Message": "Created product successfully"}
 
 def update_producte(id_producte: str, cost: str, quantitat: str, nom_producte: str, id_proveidor: str, id_prestatgeria: str, db: Session):
-    sql_select = select(Producte).where(Producte.id_producte == id_producte)
+    sql_select = select(id_producte).where(Producte.id_producte == id_producte)
     producte_db = db.exec(sql_select).one()
 
     producte_db.id_producte = id_producte
@@ -41,7 +41,7 @@ def update_producte(id_producte: str, cost: str, quantitat: str, nom_producte: s
     return {"msg": "Updated product successfully"}
 
 def delete_producte(id_producte: str, db: Session):
-    sql_select = select(Producte).where(Producte.id_producte == id_producte)
+    sql_select = select(id_producte).where(Producte.id_producte == id_producte)
     producte_db = db.exec(sql_select).one()
 
     db.delete(producte_db)
