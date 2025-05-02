@@ -6,4 +6,4 @@ class Client(SQLModel, table=True):
     nom: str
     email: str
     telefon: str
-#-----------------------------final-taula-Client--------------------------------------------------#
+#-----------------------------final-taula-Client-----------------------------------------------#
