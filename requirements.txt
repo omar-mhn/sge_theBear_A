@@ -1,0 +1,5 @@
+fastapi
+sqlmodel
+psycopg2
+python-dotenv
+uvicorn
