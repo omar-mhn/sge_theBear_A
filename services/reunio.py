@@ -50,4 +50,13 @@ def update_reunio_field(id_reunio: int, data: dict, db: Session):
     reunio_db = db.exec(sql_select).one_or_none()
 
     if not reunio_db:
-        return
+        return None
+
+    for key, value in data.items():
+        if hasattr(reunio_db, key) and key != "id_reunio":
+            setattr(reunio_db, key, value)
+
+    db.add(reunio_db)
+    db.commit()
+    db.refresh(reunio_db)
+    return {"Missatge": "Camp(s) actualitzat(s) correctament"}

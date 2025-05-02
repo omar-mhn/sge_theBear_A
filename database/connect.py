@@ -7,6 +7,6 @@ def connection_db():
         user="admin",
         host="localhost",
         port="5432"
-        )
+    )
 
     return conn

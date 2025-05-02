@@ -12,7 +12,7 @@ def get_producte(id_producte: int, db: Session):
     producte = db.exec(sql_read).one()
     return productes_schema([producte])
 
-def add_new_producte(id_producte: int, cost: str, quantitat: str, nom_producte: str, id_proveidor: int, id_prestatgeria: int, db: Session):
+def add_new_producte(id_producte: int, cost: float, quantitat: int, nom_producte: str, id_proveidor: int, id_prestatgeria: int, db: Session):
     db_producte = Producte(
         id_producte=id_producte,
         cost=cost,
@@ -26,7 +26,7 @@ def add_new_producte(id_producte: int, cost: str, quantitat: str, nom_producte: 
     db.refresh(db_producte)
     return {"Missatge": "Producte creat correctament"}
 
-def update_producte(id_producte: int, cost: str, quantitat: str, nom_producte: str, id_proveidor: int, id_prestatgeria: int, db: Session):
+def update_producte(id_producte: int, cost: float, quantitat: int, nom_producte: str, id_proveidor: int, id_prestatgeria: int, db: Session):
     sql_select = select(Producte).where(Producte.id_producte == id_producte)
     producte_db = db.exec(sql_select).one()
 

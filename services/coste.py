@@ -12,7 +12,7 @@ def get_coste(id_factura: int, db: Session):
     coste = db.exec(sql_read).one()
     return costes_schema([coste])
 
-def add_new_coste(id_factura: int, data: str, tipus_cost: str, cost_total: str, id_compra: int, id_empleat: int, id_comanda: int, db: Session):
+def add_new_coste(id_factura: int, data: str, tipus_cost: str, cost_total: int, id_compra: int, id_empleat: int, id_comanda: int, db: Session):
     db_coste = Coste(
         id_factura=id_factura,
         data=data,
@@ -27,7 +27,7 @@ def add_new_coste(id_factura: int, data: str, tipus_cost: str, cost_total: str, 
     db.refresh(db_coste)
     return {"Missatge": "Cost afegit correctament"}
 
-def update_coste(id_factura: int, data: str, tipus_cost: str, cost_total: str, id_compra: int, id_empleat: int, id_comanda: int, db: Session):
+def update_coste(id_factura: int, data: str, tipus_cost: str, cost_total: int, id_compra: int, id_empleat: int, id_comanda: int, db: Session):
     sql_select = select(Coste).where(Coste.id_factura == id_factura)
     coste_db = db.exec(sql_select).one()
 
