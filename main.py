@@ -153,7 +153,7 @@ async def update_reunio_field(id_reunio: int, field: str, value: str, db: Sessio
     result = reunio.update_reunio_field(id_reunio, data, db)
     return result
 
-@app.delete("/reunions/", response_model=dict)
+@app.delete("/reunions/del", response_model=dict)
 async def delete_reunio(id_reunio: int, db: Session = Depends(get_db)):
     result = reunio.delete_reunio(id_reunio, db)
     return result
