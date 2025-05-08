@@ -36,7 +36,10 @@
     "Python.user.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
+<<<<<<< HEAD
     "git-widget-placeholder": "main",
+=======
+>>>>>>> db8bc31beb125ccf15cefef7982c8d2fcf168a2e
     "last_opened_file_path": "/home/dev/Documents/SGE/sge_theBear_A"
   }
 }]]></component>
