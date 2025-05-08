@@ -1,5 +1,4 @@
 import os
-from typing import List
 from fastapi import FastAPI, Depends
 from sqlmodel import SQLModel, create_engine, Session
 from dotenv import load_dotenv
@@ -18,7 +17,7 @@ def get_db():
         db.close()
 
 app = FastAPI()
-
+"""
 #--------------------------------taula-Coste--------------------------------------------------#
 @app.get("/costes/", response_model=list[dict])
 async def read_costes(db: Session = Depends(get_db)):
@@ -98,7 +97,7 @@ async def update_producte_field(id_producte: int, field: str, value: str, db: Se
 async def delete_producte(id_producte: int, db: Session = Depends(get_db)):
     result = producte.delete_producte(id_producte, db)
     return result
-#-----------------------------final-taula-Producte------------------------------------------------#
+#-----------------------------final-taula-Producte------------------------------------------------#"""
 #--------------------------------taula-Reunio--------------------------------------------------#
 @app.get("/reunions/", response_model=list[dict])
 async def read_reunions(db: Session = Depends(get_db)):
@@ -115,10 +114,10 @@ async def create_reunio(
     id_reunio: int,
     data: str,
     informacio: str,
-    nom_esdeveniment: str,
+    nom_eseveniment: str,
     db: Session = Depends(get_db)
 ):
-    result = reunio.add_new_reunio(id_reunio, data, informacio, nom_esdeveniment, db)
+    result = reunio.add_new_reunio(id_reunio, data, informacio, nom_eseveniment, db)
     return result
 
 @app.put("/update_reunio/", response_model=dict)

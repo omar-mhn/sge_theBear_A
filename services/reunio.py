@@ -12,12 +12,12 @@ def get_reunio(id_reunio: int, db: Session):
     reunio = db.exec(sql_read).one()
     return reunions_schema([reunio])  # On retourne une liste pour rester compatible avec le schema
 
-def add_new_reunio(id_reunio: int, data: str, informacio: str, nom_esdeveniment: str, db: Session):
+def add_new_reunio(id_reunio: int, data: str, informacio: str, nom_eseveniment: str, db: Session):
     db_reunio = Reunio(
         id_reunio=id_reunio,
         data=data,
         informacio=informacio,
-        nom_esdeveniment=nom_esdeveniment
+        nom_eseveniment=nom_eseveniment
     )
     db.add(db_reunio)
     db.commit()
