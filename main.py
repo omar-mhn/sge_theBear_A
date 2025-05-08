@@ -125,7 +125,7 @@ async def read_reunio_by_id(id_reunio: int, db: Session = Depends(get_db)):
     result = reunio.get_reunio(id_reunio, db)
     return result
 
-@app.post("/reunions/", response_model=dict)
+@app.post("/reunions/create", response_model=dict)
 async def create_reunio(
     id_reunio: int,
     data: str,
