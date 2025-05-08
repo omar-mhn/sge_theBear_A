@@ -1,17 +1,16 @@
 import os
-<<<<<<< HEAD
+
 from fastapi import FastAPI, Depends
 from sqlmodel import SQLModel, create_engine, Session
 from dotenv import load_dotenv
 from services import reunio, producte,coste
-=======
+
 from dotenv import load_dotenv
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from sqlmodel import SQLModel, create_engine, Session
 
 from services import client, comanda, planificacio, compra
->>>>>>> 29fddba1f32e2b4742836aa82c71f8348c8b115a
 
 load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_URL")
@@ -26,8 +25,7 @@ def get_db():
         db.close()
 
 app = FastAPI()
-<<<<<<< HEAD
-"""
+
 #--------------------------------taula-Coste--------------------------------------------------#
 @app.get("/costes/", response_model=list[dict])
 async def read_costes(db: Session = Depends(get_db)):
@@ -107,7 +105,7 @@ async def update_producte_field(id_producte: int, field: str, value: str, db: Se
 async def delete_producte(id_producte: int, db: Session = Depends(get_db)):
     result = producte.delete_producte(id_producte, db)
     return result
-#-----------------------------final-taula-Producte------------------------------------------------#"""
+#-----------------------------final-taula-Producte------------------------------------------------#
 #--------------------------------taula-Reunio--------------------------------------------------#
 @app.get("/reunions/", response_model=list[dict])
 async def read_reunions(db: Session = Depends(get_db)):
@@ -152,7 +150,6 @@ async def delete_reunio(id_reunio: int, db: Session = Depends(get_db)):
     result = reunio.delete_reunio(id_reunio, db)
     return result
 #-----------------------------final-taula-Reunio------------------------------------------------#
-=======
 
 app.add_middleware(
     CORSMiddleware,
@@ -366,4 +363,3 @@ async def delete_compra(id_compra: int, db: Session = Depends(get_db)):
     result = compra.delete_compra(id_compra, db)
     return result
 #-----------------------------final-taula-Compra------------------------------------------------#
->>>>>>> 29fddba1f32e2b4742836aa82c71f8348c8b115a
