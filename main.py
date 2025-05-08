@@ -3,7 +3,7 @@ import os
 from fastapi import FastAPI, Depends
 from sqlmodel import SQLModel, create_engine, Session
 from dotenv import load_dotenv
-from services import reunio, producte,coste
+from services import inventari, producte_final, reunio, producte,coste
 
 from dotenv import load_dotenv
 from fastapi import FastAPI, Depends
@@ -363,3 +363,117 @@ async def delete_compra(id_compra: int, db: Session = Depends(get_db)):
     result = compra.delete_compra(id_compra, db)
     return result
 #-----------------------------final-taula-Compra------------------------------------------------#
+
+#-----------------------------taula-Inventari------------------------------------------------#
+@app.get("/inventaris/", response_model=list[dict])
+async def read_inventaris(db: Session = Depends(get_db)):
+    result = inventari.get_all_inventaris(db)
+    return result
+
+@app.get("/inventaris/{id_estanteria}", response_model=dict)
+async def read_inventari_by_id(id_estanteria: int, db: Session = Depends(get_db)):
+    result = inventari.get_inventari(id_estanteria, db)
+    return result
+
+@app.post("/inventaris/", response_model=dict)
+async def create_inventari(
+    id_estanteria: int,
+    nombre_materia_prima: str,
+    cantidad_min: int,
+    fecha_entrada: str,
+    fecha_caducidad: str,
+    stock: int,
+    db: Session = Depends(get_db)
+):
+    result = inventari.add_new_inventari(
+        id_estanteria, nombre_materia_prima, cantidad_min, fecha_entrada, fecha_caducidad, stock, db
+    )
+    return result
+
+@app.put("/update_inventari/", response_model=dict)
+async def update_inventari(
+    id_estanteria: int,
+    nombre_materia_prima: str,
+    cantidad_min: int,
+    fecha_entrada: str,
+    fecha_caducidad: str,
+    stock: int,
+    db: Session = Depends(get_db)
+):
+    result = inventari.update_inventari(
+        id_estanteria, nombre_materia_prima, cantidad_min, fecha_entrada, fecha_caducidad, stock, db
+    )
+    return result
+
+@app.put("/update_inventari_field/", response_model=dict)
+async def update_inventari_field(
+    id_estanteria: int,
+    field: str,
+    value: str,
+    db: Session = Depends(get_db)
+):
+    data = {field: value}
+    result = inventari.update_inventari_field(id_estanteria, data, db)
+    return result
+
+@app.delete("/inventaris/", response_model=dict)
+async def delete_inventari(id_estanteria: int, db: Session = Depends(get_db)):
+    result = inventari.delete_inventari(id_estanteria, db)
+    return result
+
+#-----------------------------final-taula-Inventari-----------------------------------------------#
+#-----------------------------taula-Producte_final------------------------------------------------#
+@app.get("/productes_finals/", response_model=list[dict])
+async def read_productes_finals(db: Session = Depends(get_db)):
+    result = producte_final.get_all_productes_finals(db)
+    return result
+
+@app.get("/productes_finals/{id_producto_fin}", response_model=dict)
+async def read_producte_final_by_id(id_producto_fin: int, db: Session = Depends(get_db)):
+    result = producte_final.get_producte_final(id_producto_fin, db)
+    return result
+
+@app.post("/productes_finals/", response_model=dict)
+async def create_producte_final(
+    id_producto_fin: int,
+    nombre: str,
+    tipo: str,
+    precio: float,
+    comandaid: int,
+    db: Session = Depends(get_db)
+):
+    result = producte_final.add_new_producte_final(
+        id_producto_fin, nombre, tipo, precio, comandaid, db
+    )
+    return result
+
+@app.put("/update_producte_final/", response_model=dict)
+async def update_producte_final(
+    id_producto_fin: int,
+    nombre: str,
+    tipo: str,
+    precio: float,
+    comandaid: int,
+    db: Session = Depends(get_db)
+):
+    result = producte_final.update_producte_final(
+        id_producto_fin, nombre, tipo, precio, comandaid, db
+    )
+    return result
+
+@app.put("/update_producte_final_field/", response_model=dict)
+async def update_producte_final_field(
+    id_producto_fin: int,
+    field: str,
+    value: str,
+    db: Session = Depends(get_db)
+):
+    data = {field: value}
+    result = producte_final.update_producte_final_field(id_producto_fin, data, db)
+    return result
+
+@app.delete("/productes_finals/", response_model=dict)
+async def delete_producte_final(id_producto_fin: int, db: Session = Depends(get_db)):
+    result = producte_final.delete_producte_final(id_producto_fin, db)
+    return result
+#-----------------------------final-taula-Producte_final------------------------------------------------#
