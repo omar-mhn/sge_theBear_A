@@ -5,22 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="73b6b200-6921-4664-9029-4869b6d5f2e3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/MAINMIO.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/Proveïdor.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/schema/proveïdors_sch.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/proveïdor.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/venta.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sge_theBear_A.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sge_theBear_A.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/Compra.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/Cost.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/Venta.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/schema/compres_sch.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/schema/costs_sch.py" beforeDir="false" afterPath="$PROJECT_DIR$/schema/vendes_sch.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/compra.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
