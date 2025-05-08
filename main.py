@@ -10,7 +10,7 @@ from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from sqlmodel import SQLModel, create_engine, Session
 
-from services import client, comanda, planificacio, compra
+from services import client, comanda, planificacio, proveïdor, venta
 
 load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_URL")
@@ -304,65 +304,114 @@ async def delete_planificacio(id_horari: int, db: Session = Depends(get_db)):
     return result
 
 #---------------------------final-taula-Planificacio----------------------------------------------#
-#--------------------------------taula-Compra--------------------------------------------------#
-@app.get("/compres/", response_model=list[dict])
-async def read_compres(db: Session = Depends(get_db)):
-    result = compra.get_all_compres(db)
+
+#--------------------------------taula-Proveïdor--------------------------------------------------#
+@app.get("/proveïdors/", response_model=list[dict])
+async def read_proveïdors(db: Session = Depends(get_db)):
+    result = proveïdor.get_all_proveïdors(db)
     return result
 
-@app.get("/compres/{id_compra}", response_model=dict)
-async def read_compra_by_id(id_compra: int, db: Session = Depends(get_db)):
-    result = compra.get_compra(id_compra, db)
+@app.get("/proveïdors/{id_proveïdor}", response_model=dict)
+async def read_proveïdor_by_id(id_proveïdor: int, db: Session = Depends(get_db)):
+    result = proveïdor.get_proveïdor(id_proveïdor, db)
     return result
 
-@app.post("/compres/", response_model=dict)
-async def create_compra(
-    id_compra: int,
-    proveïdor: str,
-    productes: str,
-    quantitat_producte: int,
-    preu_producte: float,
-    preu_total: float,
-    data_compra: str,
+@app.post("/proveïdors/", response_model=dict)
+async def create_proveïdor(
+    id_proveïdor: int,
+    nom: str,
+    telefòn: str,
+    email: str,
+    informaciò: str,
     db: Session = Depends(get_db)
 ):
-    result = compra.add_new_compra(
-        id_compra, proveïdor, productes, quantitat_producte, preu_producte, preu_total, data_compra, db
+    result = proveïdor.add_new_proveïdor(
+        id_proveïdor, nom, telefòn, email, informaciò, db
     )
     return result
 
-@app.put("/compres/", response_model=dict)
-async def update_compra(
-    id_compra: int,
-    proveïdor: str,
-    productes: str,
-    quantitat_producte: int,
-    preu_producte: float,
-    preu_total: float,
-    data_compra: str,
+@app.put("/update_proveïdor/", response_model=dict)
+async def update_proveïdor(
+    id_proveïdor: int,
+    nom: str,
+    telefòn: str,
+    email: str,
+    informaciò: str,
     db: Session = Depends(get_db)
 ):
-    result = compra.update_compra(
-        id_compra, proveïdor, productes, quantitat_producte, preu_producte, preu_total, data_compra, db
+    result = proveïdor.update_proveïdor(
+        id_proveïdor, nom, telefòn, email, informaciò, db
     )
     return result
 
-@app.patch("/compres/", response_model=dict)
-async def update_compra_field(
-    id_compra: int,
+@app.put("/update_proveïdor_field/", response_model=dict)
+async def update_proveïdor_field(
+    id_proveïdor: int,
     field: str,
     value: str,
     db: Session = Depends(get_db)
 ):
     data = {field: value}
-    result = compra.update_compra_field(id_compra, data, db)
+    result = proveïdor.update_proveïdor_field(id_proveïdor, data, db)
     return result
 
-@app.delete("/compres/{id_compra}", response_model=dict)
-async def delete_compra(id_compra: int, db: Session = Depends(get_db)):
-    result = compra.delete_compra(id_compra, db)
+@app.delete("/proveïdors/", response_model=dict)
+async def delete_proveïdor(id_proveïdor: int, db: Session = Depends(get_db)):
+    result = proveïdor.delete_proveïdor(id_proveïdor, db)
     return result
-#-----------------------------final-taula-Compra------------------------------------------------#
+#-----------------------------final-taula-Proveïdor------------------------------------------------#
+
+#--------------------------------taula-Venta--------------------------------------------------#
+@app.get("/vendes/", response_model=list[dict])
+async def read_vendes(db: Session = Depends(get_db)):
+    result = venta.get_all_vendes(db)
+    return result
+
+@app.get("/vendes/{id_venta}", response_model=dict)
+async def read_venta_by_id(id_venta: int, db: Session = Depends(get_db)):
+    result = venta.get_venta(id_venta, db)
+    return result
+
+@app.post("/vendes/", response_model=dict)
+async def create_venta(
+    id_venta: int,
+    cost_total: int,
+    data_comanda: str,
+    db: Session = Depends(get_db)
+):
+    result = venta.add_new_venta(
+        id_venta, cost_total, data_comanda, db
+    )
+    return result
+
+@app.put("/update_venta/", response_model=dict)
+async def update_venta(
+    id_venta: int,
+    cost_total: int,
+    data_comanda: str,
+    db: Session = Depends(get_db)
+):
+    result = venta.update_venta(
+        id_venta, cost_total, data_comanda, db
+    )
+    return result
+
+@app.put("/update_venta_field/", response_model=dict)
+async def update_venta_field(
+    id_venta: int,
+    field: str,
+    value: str,
+    db: Session = Depends(get_db)
+):
+    data = {field: value}
+    result = venta.update_venta_field(id_venta, data, db)
+    return result
+
+@app.delete("/vendes/", response_model=dict)
+async def delete_venta(id_venta: int, db: Session = Depends(get_db)):
+    result = venta.delete_venta(id_venta, db)
+    return result
+#-----------------------------final-taula-Venta------------------------------------------------#
 
 #-----------------------------taula-Inventari------------------------------------------------#
 @app.get("/inventaris/", response_model=list[dict])

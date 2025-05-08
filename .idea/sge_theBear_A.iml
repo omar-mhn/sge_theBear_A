@@ -4,11 +4,7 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
     </content>
-<<<<<<< HEAD
-    <orderEntry type="jdk" jdkName="Python 3.10 (SGE-BLOC2)" jdkType="Python SDK" />
-=======
     <orderEntry type="jdk" jdkName="Python 3.10 (sge_theBear_A)" jdkType="Python SDK" />
->>>>>>> 29fddba1f32e2b4742836aa82c71f8348c8b115a
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
