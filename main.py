@@ -26,6 +26,14 @@ def get_db():
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Pots posar aquí només el teu frontend si vols més seguretat
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 #--------------------------------taula-Coste--------------------------------------------------#
 @app.get("/costes/", response_model=list[dict])
 async def read_costes(db: Session = Depends(get_db)):
@@ -150,14 +158,6 @@ async def delete_reunio(id_reunio: int, db: Session = Depends(get_db)):
     result = reunio.delete_reunio(id_reunio, db)
     return result
 #-----------------------------final-taula-Reunio------------------------------------------------#
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # Pots posar aquí només el teu frontend si vols més seguretat
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 #--------------------------------taula-Client--------------------------------------------------#
 @app.get("/clients/", response_model= list[dict])
