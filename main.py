@@ -42,7 +42,7 @@ async def read_coste_by_id(id_cost: int, db: Session = Depends(get_db)):
     result = coste.get_coste(id_cost, db)
     return result
 
-@app.post("/costes/", response_model=dict)
+@app.post("/costes/create", response_model=dict)
 async def create_coste(id_cost: int, descripcio: str, valor: float, db: Session = Depends(get_db)):
     result = coste.add_new_coste(id_cost, descripcio, valor, db)
     return result
@@ -195,7 +195,7 @@ async def read_producte_by_id(id_producte: int, db: Session = Depends(get_db)):
     result = producte.get_producte(id_producte, db)
     return result
 
-@app.post("/productes/", response_model=dict)
+@app.post("/productes/create", response_model=dict)
 async def create_producte(
     id_producte: int,
     cost: float,
