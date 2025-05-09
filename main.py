@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
 
-from services import coste, empleat, client, proveïdor, producte, inventari, reserva, comanda, venta, producte_final,reunio, participar, planificacio
+from services import coste, empleat, client, proveidor, producte, inventari, reserva, comanda, venta, producte_final,reunio, participar, planificacio
 
 load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_URL")
@@ -128,61 +128,61 @@ async def delete_client(id_client:int, db:Session = Depends(get_db)):
     return result
 #-----------------------------final-taula-Client------------------------------------------------#
 
-#--------------------------------taula-Proveïdor--------------------------------------------------#
-@app.get("/proveïdors/", response_model=list[dict])
-async def read_proveïdors(db: Session = Depends(get_db)):
-    result = proveïdor.get_all_proveïdors(db)
+#--------------------------------taula-Proveidor--------------------------------------------------#
+@app.get("/proveidors/", response_model=list[dict])
+async def read_proveidors(db: Session = Depends(get_db)):
+    result = proveidor.get_all_proveidors(db)
     return result
 
-@app.get("/proveïdors/{id_proveïdor}", response_model=dict)
-async def read_proveïdor_by_id(id_proveïdor: int, db: Session = Depends(get_db)):
-    result = proveïdor.get_proveïdor(id_proveïdor, db)
+@app.get("/proveidors/{id_proveidor}", response_model=dict)
+async def read_proveidor_by_id(id_proveidor: int, db: Session = Depends(get_db)):
+    result = proveidor.get_proveidor(id_proveidor, db)
     return result
 
-@app.post("/proveïdors/", response_model=dict)
-async def create_proveïdor(
-    id_proveïdor: int,
+@app.post("/proveidors/", response_model=dict)
+async def create_proveidor(
+    id_proveidor: int,
     nom: str,
     telefòn: str,
     email: str,
     informaciò: str,
     db: Session = Depends(get_db)
 ):
-    result = proveïdor.add_new_proveïdor(
-        id_proveïdor, nom, telefòn, email, informaciò, db
+    result = proveidor.add_new_proveidor(
+        id_proveidor, nom, telefòn, email, informaciò, db
     )
     return result
 
-@app.put("/update_proveïdor/", response_model=dict)
-async def update_proveïdor(
-    id_proveïdor: int,
+@app.put("/update_proveidor/", response_model=dict)
+async def update_proveidor(
+    id_proveidor: int,
     nom: str,
     telefòn: str,
     email: str,
     informaciò: str,
     db: Session = Depends(get_db)
 ):
-    result = proveïdor.update_proveïdor(
-        id_proveïdor, nom, telefòn, email, informaciò, db
+    result = proveidor.update_proveidor(
+        id_proveidor, nom, telefòn, email, informaciò, db
     )
     return result
 
-@app.put("/update_proveïdor_field/", response_model=dict)
-async def update_proveïdor_field(
-    id_proveïdor: int,
+@app.put("/update_proveidor_field/", response_model=dict)
+async def update_proveidor_field(
+    id_proveidor: int,
     field: str,
     value: str,
     db: Session = Depends(get_db)
 ):
     data = {field: value}
-    result = proveïdor.update_proveïdor_field(id_proveïdor, data, db)
+    result = proveidor.update_proveidor_field(id_proveidor, data, db)
     return result
 
-@app.delete("/proveïdors/", response_model=dict)
-async def delete_proveïdor(id_proveïdor: int, db: Session = Depends(get_db)):
-    result = proveïdor.delete_proveïdor(id_proveïdor, db)
+@app.delete("/proveidors/", response_model=dict)
+async def delete_proveidor(id_proveidor: int, db: Session = Depends(get_db)):
+    result = proveidor.delete_proveidor(id_proveidor, db)
     return result
-#-----------------------------final-taula-Proveïdor------------------------------------------------#
+#-----------------------------final-taula-Proveidor------------------------------------------------#
 
 #--------------------------------taula-Producte--------------------------------------------------#
 @app.get("/productes/", response_model=list[dict])
