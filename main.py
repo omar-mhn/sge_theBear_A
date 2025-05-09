@@ -452,11 +452,11 @@ async def create_producte_final(
     nombre: str,
     tipo: str,
     precio: float,
-    comandaid: int,
+    id_comanda: int,
     db: Session = Depends(get_db)
 ):
     result = producte_final.add_new_producte_final(
-        id_producto_fin, nombre, tipo, precio, comandaid, db
+        id_producto_fin, nombre, tipo, precio, id_comanda, db
     )
     return result
 
@@ -466,11 +466,11 @@ async def update_producte_final(
     nombre: str,
     tipo: str,
     precio: float,
-    comandaid: int,
+    id_comanda: int,
     db: Session = Depends(get_db)
 ):
     result = producte_final.update_producte_final(
-        id_producto_fin, nombre, tipo, precio, comandaid, db
+        id_producto_fin, nombre, tipo, precio, id_comanda, db
     )
     return result
 
