@@ -6,5 +6,5 @@ class Planificacio(SQLModel, table=True):
     data: str
     horari: int
     rol: str
-    empleatid: int = Field(default=None, foreign_key="empleat.empleatid")
+    id_empleat: int = Field(default=None, foreign_key="empleat.id_empleat")
 #-----------------------------final-taula-Planificacio--------------------------------------------------#

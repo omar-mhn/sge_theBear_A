@@ -3,6 +3,7 @@ from sqlmodel import Session, select
 from models.Venta import Venta
 
 #--------------------------------taula-Venta---------------------------------------------------#
+
 def get_all_vendes(db: Session):
     sql_read = select(Venta)
     vendes = db.exec(sql_read).all()
@@ -64,4 +65,5 @@ def delete_venta(id_venta: int, db: Session):
     db.delete(venta_db)
     db.commit()
     return {"Missatge": "Venta esborrat correctament"}
+
 #-----------------------------final-taula-Venta------------------------------------------------#

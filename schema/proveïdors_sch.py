@@ -1,4 +1,5 @@
 #--------------------------------taula-Proveïdor--------------------------------------------------#
+
 def proveïdor_schema(proveïdor) -> dict:
     response = {"proveïdor": proveïdor}
     return response
