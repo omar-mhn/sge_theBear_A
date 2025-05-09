@@ -3,6 +3,7 @@ from sqlmodel import Session, select
 from models.Proveïdor import Proveïdor
 
 #--------------------------------taula-Proveïdor---------------------------------------------------#
+
 def get_all_proveïdors(db: Session):
     sql_read = select(Proveïdor)
     proveïdors = db.exec(sql_read).all()
@@ -70,4 +71,5 @@ def delete_proveïdor(id_proveïdor: int, db: Session):
     db.delete(proveïdor_db)
     db.commit()
     return {"Missatge": "Proveïdor esborrat correctament"}
+
 #-----------------------------final-taula-Proveïdor------------------------------------------------#

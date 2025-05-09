@@ -1,4 +1,5 @@
 #--------------------------------taula-Venta--------------------------------------------------#
+
 def venta_schema(venta) -> dict:
     response = {"venta": venta}
     return response
