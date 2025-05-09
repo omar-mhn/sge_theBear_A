@@ -6,5 +6,5 @@ class Producte_final(SQLModel, table=True):
     nombre: str
     tipo: str
     precio: float
-    comandaid: int = Field(default=None, foreign_key="comanda.comandaid")
+    id_comanda: int = Field(default=None, foreign_key="comanda.id_comanda")
 #-----------------------------final-taula-Producte_final--------------------------------------------------#
