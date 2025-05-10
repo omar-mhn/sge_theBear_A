@@ -10,7 +10,7 @@ def get_all_reunions(db: Session):
 def get_reunio(id_reunio: int, db: Session):
     sql_read = select(Reunio).where(Reunio.id_reunio == id_reunio)
     reunio = db.exec(sql_read).one()
-    return reunions_schema([reunio])  # On retourne une liste pour rester compatible avec le schema
+    return reunio.dict() # On retourne une liste pour rester compatible avec le schema
 
 def add_new_reunio(id_reunio: int, data: str, informacio: str, nom_eseveniment: str, db: Session):
     db_reunio = Reunio(
@@ -24,13 +24,13 @@ def add_new_reunio(id_reunio: int, data: str, informacio: str, nom_eseveniment: 
     db.refresh(db_reunio)
     return {"Missatge": "Reunió creada correctament"}
 
-def update_reunio(id_reunio: int, data: str, informacio: str, nom_esdeveniment: str, db: Session):
+def update_reunio(id_reunio: int, data: str, informacio: str, nom_eseveniment: str, db: Session):
     sql_select = select(Reunio).where(Reunio.id_reunio == id_reunio)
     reunio_db = db.exec(sql_select).one()
 
     reunio_db.data = data
     reunio_db.informacio = informacio
-    reunio_db.nom_esdeveniment = nom_esdeveniment
+    reunio_db.nom_eseveniment = nom_eseveniment
 
     db.add(reunio_db)
     db.commit()

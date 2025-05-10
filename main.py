@@ -3,11 +3,12 @@ import os
 from fastapi import FastAPI, Depends
 from sqlmodel import SQLModel, create_engine, Session
 from dotenv import load_dotenv
+from typing import Optional
+from decimal import Decimal
 
-from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
 
-from services import coste, empleat, client, proveïdor, producte, inventari, reserva, comanda, venta, producte_final,reunio, participar, planificacio
+from services import coste, empleat, client, proveidor, producte, inventari, reserva, comanda, vendre, producte_final,reunio, participar, planificacio
 
 load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_URL")
@@ -33,39 +34,39 @@ app.add_middleware(
 
 #--------------------------------taula-Coste--------------------------------------------------#
 @app.get("/costes/", response_model=list[dict])
-async def read_costes(db: Session = Depends(get_db)):
+async def get_all_costes(db: Session = Depends(get_db)):
     result = coste.get_all_costes(db)
     return result
 
-@app.get("/costes/{id_cost}", response_model=dict)
-async def read_coste_by_id(id_cost: int, db: Session = Depends(get_db)):
-    result = coste.get_coste(id_cost, db)
+@app.get("/costes/{id_factura}", response_model=dict)
+async def rget_coste(id_factura: int, db: Session = Depends(get_db)):
+    result = coste.get_coste(id_factura, db)
     return result
 
-@app.post("/costes/", response_model=dict)
-async def create_coste(id_cost: int, descripcio: str, valor: float, db: Session = Depends(get_db)):
-    result = coste.add_new_coste(id_cost, descripcio, valor, db)
+@app.post("/create_costes/", response_model=dict)
+async def add_new_coste(id_factura: int, data: str, tipus_cost: str, cost_total: int, id_compra: int, id_empleat: int, id_comanda: int,  db: Session = Depends(get_db)):
+    result = coste.add_new_coste(id_factura, data, tipus_cost, cost_total, id_compra, id_empleat, id_comanda, db)
     return result
 
-@app.put("/update_coste/", response_model=dict)
-async def update_coste(id_cost: int, descripcio: str, valor: float, db: Session = Depends(get_db)):
-    result = coste.update_coste(id_cost, descripcio, valor, db)
+@app.put("/update_costes/", response_model=dict)
+async def update_coste(id_factura: int, data: str, tipus_cost: str, cost_total: int, id_compra: int, id_empleat: int, id_comanda: int, db: Session = Depends(get_db)):
+    result = coste.update_coste(id_factura, data, tipus_cost, cost_total, id_compra, id_empleat, id_comanda, db)
     return result
 
 @app.put("/update_coste_field/", response_model=dict)
-async def update_coste_field(id_cost: int, field: str, value: str, db: Session = Depends(get_db)):
+async def update_coste_field(id_factura: int, field: str, value: str, db: Session = Depends(get_db)):
     data = {field: value}
-    result = coste.update_coste_field(id_cost, data, db)
+    result = coste.update_coste_field(id_factura, data, db)
     return result
 
-@app.delete("/costes/", response_model=dict)
-async def delete_coste(id_cost: int, db: Session = Depends(get_db)):
-    result = coste.delete_coste(id_cost, db)
+@app.delete("/delete-costes/", response_model=dict)
+async def delete_coste(id_factura: int, db: Session = Depends(get_db)):
+    result = coste.delete_coste(id_factura, db)
     return result
 #-----------------------------final-taula-Coste------------------------------------------------#
 
 #--------------------------------MODULE-EMPLEATS--------------------------------------------------#
-@app.get("/read_all_empleats/", response_model= list[dict])
+@app.get("/empleats/", response_model= list[dict])
 async def read_empleat(db:Session = Depends(get_db)):
     result = empleat.get_all_empleats(db)
     return result
@@ -79,16 +80,17 @@ async def create_empleat(id_empleat:int, nom: str, email:str, telefon: str, adre
     result = empleat.add_new_empleat(id_empleat, nom, email, telefon, adreca, rol, db)
     return result
 
-@app.put("/update_empleat/", response_model=dict)
+@app.put("/update_empleats/", response_model=dict)
 async def update_empleat(id_empleat:int, nom: str, email:str, telefon: str, adreca: str, rol: str, db:Session = Depends(get_db)):
     result = empleat.update_empleat(id_empleat, nom, email, telefon, adreca, rol, db)
     return result
 
-@app.patch("/empleats/{id_empleat}", response_model=dict)
+@app.patch("/update_empleats_field/{id_empleat}", response_model=dict)
 async def modify_empleat_field(id_empleat: int, field: str, value: str, db: Session = Depends(get_db)):
-    return empleat.update_empleat_field(id_empleat, {field: value}, db)
+    data = {field: value}
+    return empleat.update_empleat_field(id_empleat, data, db)
 
-@app.delete("/delete_empleat/", response_model=dict)
+@app.delete("/delete_empleats/", response_model=dict)
 async def delete_empleat(id_empleat:int, db:Session = Depends(get_db)):
     result = empleat.delete_empleat(id_empleat, db)
     return result
@@ -106,83 +108,83 @@ async def read_client_by_id(id_client: int, db: Session = Depends(get_db)):
     result = client.get_client(id_client, db)
     return result
 
-@app.post("/clients/", response_model=dict)
-async def create_client(id_client:int, nom: str, email:str, telefon: str, db:Session = Depends(get_db)):
+@app.post("/create_clients/", response_model=dict)
+async def create_client(id_client:int, nom: str, email:Optional[str] = None, telefon: Optional[str] = None, db:Session = Depends(get_db)):
     result = client.add_new_client(id_client, nom, email, telefon, db)
     return result
 
-@app.put("/update_client/", response_model=dict)
-async def update_client(id_client:int, nom: str, email:str, telefon: str, db:Session = Depends(get_db)):
+@app.put("/update_clients/", response_model=dict)
+async def update_client(id_client:int, nom: str, email:Optional[str] = None, telefon: Optional[str] = None, db:Session = Depends(get_db)):
     result = client.update_client(id_client, nom, email, telefon, db)
     return result
 
-@app.put("/update_client_field/", response_model=dict)
+@app.put("/update_clients_field/", response_model=dict)
 async def update_client_field(id_client: int, field: str, value: str, db: Session = Depends(get_db)):
     data = {field: value}
     result = client.update_client_field(id_client, data, db)
     return result
 
-@app.delete("/clients/", response_model=dict)
+@app.delete("/delete_clients/", response_model=dict)
 async def delete_client(id_client:int, db:Session = Depends(get_db)):
     result = client.delete_client(id_client, db)
     return result
 #-----------------------------final-taula-Client------------------------------------------------#
 
-#--------------------------------taula-Proveïdor--------------------------------------------------#
-@app.get("/proveïdors/", response_model=list[dict])
-async def read_proveïdors(db: Session = Depends(get_db)):
-    result = proveïdor.get_all_proveïdors(db)
+#--------------------------------taula-Proveidor--------------------------------------------------#
+@app.get("/proveidors/", response_model=list[dict])
+async def read_proveidors(db: Session = Depends(get_db)):
+    result = proveidor.get_all_proveidors(db)
     return result
 
-@app.get("/proveïdors/{id_proveïdor}", response_model=dict)
-async def read_proveïdor_by_id(id_proveïdor: int, db: Session = Depends(get_db)):
-    result = proveïdor.get_proveïdor(id_proveïdor, db)
+@app.get("/proveidors/{id_proveidor}", response_model=dict)
+async def read_proveidor_by_id(id_proveidor: int, db: Session = Depends(get_db)):
+    result = proveidor.get_proveidor(id_proveidor, db)
     return result
 
-@app.post("/proveïdors/", response_model=dict)
-async def create_proveïdor(
-    id_proveïdor: int,
+@app.post("/create_proveidors/", response_model=dict)
+async def create_proveidor(
+    id_proveidor: int,
     nom: str,
     telefòn: str,
     email: str,
     informaciò: str,
     db: Session = Depends(get_db)
 ):
-    result = proveïdor.add_new_proveïdor(
-        id_proveïdor, nom, telefòn, email, informaciò, db
+    result = proveidor.add_new_proveidor(
+        id_proveidor, nom, telefòn, email, informaciò, db
     )
     return result
 
-@app.put("/update_proveïdor/", response_model=dict)
-async def update_proveïdor(
-    id_proveïdor: int,
+@app.put("/update_proveidors/", response_model=dict)
+async def update_proveidor(
+    id_proveidor: int,
     nom: str,
     telefòn: str,
     email: str,
     informaciò: str,
     db: Session = Depends(get_db)
 ):
-    result = proveïdor.update_proveïdor(
-        id_proveïdor, nom, telefòn, email, informaciò, db
+    result = proveidor.update_proveidor(
+        id_proveidor, nom, telefòn, email, informaciò, db
     )
     return result
 
-@app.put("/update_proveïdor_field/", response_model=dict)
-async def update_proveïdor_field(
-    id_proveïdor: int,
+@app.put("/update_proveidors_field/", response_model=dict)
+async def update_proveidor_field(
+    id_proveidor: int,
     field: str,
     value: str,
     db: Session = Depends(get_db)
 ):
     data = {field: value}
-    result = proveïdor.update_proveïdor_field(id_proveïdor, data, db)
+    result = proveidor.update_proveidor_field(id_proveidor, data, db)
     return result
 
-@app.delete("/proveïdors/", response_model=dict)
-async def delete_proveïdor(id_proveïdor: int, db: Session = Depends(get_db)):
-    result = proveïdor.delete_proveïdor(id_proveïdor, db)
+@app.delete("/delete_proveidors/", response_model=dict)
+async def delete_proveidor(id_proveidor: int, db: Session = Depends(get_db)):
+    result = proveidor.delete_proveidor(id_proveidor, db)
     return result
-#-----------------------------final-taula-Proveïdor------------------------------------------------#
+#-----------------------------final-taula-Proveidor------------------------------------------------#
 
 #--------------------------------taula-Producte--------------------------------------------------#
 @app.get("/productes/", response_model=list[dict])
@@ -195,7 +197,7 @@ async def read_producte_by_id(id_producte: int, db: Session = Depends(get_db)):
     result = producte.get_producte(id_producte, db)
     return result
 
-@app.post("/productes/", response_model=dict)
+@app.post("/create_productes/create", response_model=dict)
 async def create_producte(
     id_producte: int,
     cost: float,
@@ -208,7 +210,7 @@ async def create_producte(
     result = producte.add_new_producte(id_producte, cost, quantitat, nom_producte, id_proveidor, id_prestatgeria, db)
     return result
 
-@app.put("/update_producte/", response_model=dict)
+@app.put("/update_productes/", response_model=dict)
 async def update_producte(
     id_producte: int,
     cost: float,
@@ -221,13 +223,13 @@ async def update_producte(
     result = producte.update_producte(id_producte, cost, quantitat, nom_producte, id_proveidor, id_prestatgeria, db)
     return result
 
-@app.put("/update_producte_field/", response_model=dict)
+@app.put("/update_productes_field/", response_model=dict)
 async def update_producte_field(id_producte: int, field: str, value: str, db: Session = Depends(get_db)):
     data = {field: value}
     result = producte.update_producte_field(id_producte, data, db)
     return result
 
-@app.delete("/productes/", response_model=dict)
+@app.delete("/delete_productes/", response_model=dict)
 async def delete_producte(id_producte: int, db: Session = Depends(get_db)):
     result = producte.delete_producte(id_producte, db)
     return result
@@ -244,7 +246,7 @@ async def read_inventari_by_id(id_estanteria: int, db: Session = Depends(get_db)
     result = inventari.get_inventari(id_estanteria, db)
     return result
 
-@app.post("/inventaris/", response_model=dict)
+@app.post("/create_inventaris/", response_model=dict)
 async def create_inventari(
     id_estanteria: int,
     nombre_materia_prima: str,
@@ -259,7 +261,7 @@ async def create_inventari(
     )
     return result
 
-@app.put("/update_inventari/", response_model=dict)
+@app.put("/update_inventaris/", response_model=dict)
 async def update_inventari(
     id_estanteria: int,
     nombre_materia_prima: str,
@@ -274,7 +276,7 @@ async def update_inventari(
     )
     return result
 
-@app.put("/update_inventari_field/", response_model=dict)
+@app.put("/update_inventaris_field/", response_model=dict)
 async def update_inventari_field(
     id_estanteria: int,
     field: str,
@@ -285,7 +287,7 @@ async def update_inventari_field(
     result = inventari.update_inventari_field(id_estanteria, data, db)
     return result
 
-@app.delete("/inventaris/", response_model=dict)
+@app.delete("/delete_inventaris/", response_model=dict)
 async def delete_inventari(id_estanteria: int, db: Session = Depends(get_db)):
     result = inventari.delete_inventari(id_estanteria, db)
     return result
@@ -293,7 +295,7 @@ async def delete_inventari(id_estanteria: int, db: Session = Depends(get_db)):
 #-----------------------------final-taula-Inventari-----------------------------------------------#
 
 #-----------------------------------------TAULA-RESERVA--------------------------------------------------#
-@app.get("/get_reservas/", response_model=list[dict])
+@app.get("/reservas/", response_model=list[dict])
 async def read_reservas(db: Session = Depends(get_db)):
     return reserva.get_all_reservas(db)
 
@@ -315,7 +317,7 @@ async def update_reserva_details(
 ):
     return reserva.update_reserva(id_reserva, nom, estat, numPersona, telefon, data, id_client, db)
 
-@app.patch("/update_reserva/{id_reserva}", response_model=dict)
+@app.patch("/update_reservas_field/{id_reserva}", response_model=dict)
 async def modify_reserva_field(id_reserva: int, field: str, value: str, db: Session = Depends(get_db)):
     return reserva.update_reserva_field(id_reserva, {field: value}, db)
 
@@ -336,7 +338,7 @@ async def read_comanda_by_id(id_comanda: int, db: Session = Depends(get_db)):
     result = comanda.get_comanda(id_comanda, db)
     return result
 
-@app.post("/comandes/", response_model=dict)
+@app.post("/create_comandes/", response_model=dict)
 async def create_comanda(
     id_comanda: int,
     n_taula: int,
@@ -351,7 +353,7 @@ async def create_comanda(
     )
     return result
 
-@app.put("/update_comanda/", response_model=dict)
+@app.put("/update_comandes/", response_model=dict)
 async def update_comanda(
     id_comanda: int,
     n_taula: int,
@@ -366,7 +368,7 @@ async def update_comanda(
     )
     return result
 
-@app.put("/update_comanda_field/", response_model=dict)
+@app.put("/update_comandes_field/", response_model=dict)
 async def update_comanda_field(
     id_comanda: int,
     field: str,
@@ -377,61 +379,61 @@ async def update_comanda_field(
     result = comanda.update_comanda_field(id_comanda, data, db)
     return result
 
-@app.delete("/comandes/", response_model=dict)
+@app.delete("/delete_comandes/", response_model=dict)
 async def delete_comanda(id_comanda: int, db: Session = Depends(get_db)):
     result = comanda.delete_comanda(id_comanda, db)
     return result
 #-----------------------------final-taula-Comanda------------------------------------------------#
 
-#--------------------------------taula-Venta--------------------------------------------------#
-@app.get("/vendes/", response_model=list[dict])
+#--------------------------------taula-Vendre--------------------------------------------------#
+@app.get("/compres/", response_model=list[dict])
 async def read_vendes(db: Session = Depends(get_db)):
-    result = venta.get_all_vendes(db)
+    result = vendre.get_all_compres(db)
     return result
 
-@app.get("/vendes/{id_venta}", response_model=dict)
-async def read_venta_by_id(id_venta: int, db: Session = Depends(get_db)):
-    result = venta.get_venta(id_venta, db)
+@app.get("/compres/{id_compra}", response_model=dict)
+async def read_venta_by_id(id_compra: int, db: Session = Depends(get_db)):
+    result = vendre.get_compres(id_compra, db)
     return result
 
-@app.post("/vendes/", response_model=dict)
+@app.post("/create_compres/", response_model=dict)
 async def create_venta(
-    id_venta: int,
-    cost_total: int,
+    id_compra: int,
+    cost_total: Decimal,
     data_comanda: str,
     db: Session = Depends(get_db)
 ):
-    result = venta.add_new_venta(
-        id_venta, cost_total, data_comanda, db
+    result = vendre.add_create_compres(
+        id_compra, cost_total, data_comanda, db
     )
     return result
 
-@app.put("/update_venta/", response_model=dict)
+@app.put("/update_compres/", response_model=dict)
 async def update_venta(
-    id_venta: int,
-    cost_total: int,
+    id_compra: int,
+    cost_total: Decimal,
     data_comanda: str,
     db: Session = Depends(get_db)
 ):
-    result = venta.update_venta(
-        id_venta, cost_total, data_comanda, db
+    result = vendre.update_compres(
+        id_compra, cost_total, data_comanda, db
     )
     return result
 
-@app.put("/update_venta_field/", response_model=dict)
+@app.put("/update_compres_field/", response_model=dict)
 async def update_venta_field(
-    id_venta: int,
+    id_compra: int,
     field: str,
     value: str,
     db: Session = Depends(get_db)
 ):
     data = {field: value}
-    result = venta.update_venta_field(id_venta, data, db)
+    result = vendre.update_compres_field(id_compra, data, db)
     return result
 
-@app.delete("/vendes/", response_model=dict)
-async def delete_venta(id_venta: int, db: Session = Depends(get_db)):
-    result = venta.delete_venta(id_venta, db)
+@app.delete("/delete_compres/", response_model=dict)
+async def delete_venta(id_compra: int, db: Session = Depends(get_db)):
+    result = vendre.delete_compres(id_compra, db)
     return result
 #-----------------------------final-taula-Venta------------------------------------------------#
 
@@ -446,35 +448,35 @@ async def read_producte_final_by_id(id_producto_fin: int, db: Session = Depends(
     result = producte_final.get_producte_final(id_producto_fin, db)
     return result
 
-@app.post("/productes_finals/", response_model=dict)
+@app.post("/create_productes_finals/", response_model=dict)
 async def create_producte_final(
     id_producto_fin: int,
     nombre: str,
     tipo: str,
     precio: float,
-    comandaid: int,
+    id_comanda: int,
     db: Session = Depends(get_db)
 ):
     result = producte_final.add_new_producte_final(
-        id_producto_fin, nombre, tipo, precio, comandaid, db
+        id_producto_fin, nombre, tipo, precio, id_comanda, db
     )
     return result
 
-@app.put("/update_producte_final/", response_model=dict)
+@app.put("/update_productes_final/", response_model=dict)
 async def update_producte_final(
     id_producto_fin: int,
     nombre: str,
     tipo: str,
     precio: float,
-    comandaid: int,
+    id_comanda: int,
     db: Session = Depends(get_db)
 ):
     result = producte_final.update_producte_final(
-        id_producto_fin, nombre, tipo, precio, comandaid, db
+        id_producto_fin, nombre, tipo, precio, id_comanda, db
     )
     return result
 
-@app.put("/update_producte_final_field/", response_model=dict)
+@app.put("/update_productes_final_field/", response_model=dict)
 async def update_producte_final_field(
     id_producto_fin: int,
     field: str,
@@ -485,7 +487,7 @@ async def update_producte_final_field(
     result = producte_final.update_producte_final_field(id_producto_fin, data, db)
     return result
 
-@app.delete("/productes_finals/", response_model=dict)
+@app.delete("/delete_productes_finals/", response_model=dict)
 async def delete_producte_final(id_producto_fin: int, db: Session = Depends(get_db)):
     result = producte_final.delete_producte_final(id_producto_fin, db)
     return result
@@ -498,11 +500,11 @@ async def read_reunions(db: Session = Depends(get_db)):
     return result
 
 @app.get("/reunions/{id_reunio}", response_model=dict)
-async def read_reunio_by_id(id_reunio: int, db: Session = Depends(get_db)):
+async def get_reunio(id_reunio: int, db: Session = Depends(get_db)):
     result = reunio.get_reunio(id_reunio, db)
     return result
 
-@app.post("/reunions/create", response_model=dict)
+@app.post("/create_reunions/", response_model=dict)
 async def create_reunio(
     id_reunio: int,
     data: str,
@@ -513,7 +515,7 @@ async def create_reunio(
     result = reunio.add_new_reunio(id_reunio, data, informacio, nom_eseveniment, db)
     return result
 
-@app.put("/update_reunio/", response_model=dict)
+@app.put("/update_reunions/", response_model=dict)
 async def update_reunio(
     id_reunio: int,
     data: str,
@@ -524,20 +526,20 @@ async def update_reunio(
     result = reunio.update_reunio(id_reunio, data, informacio, nom_esdeveniment, db)
     return result
 
-@app.put("/update_reunio_field/", response_model=dict)
+@app.put("/update_reunions_field/", response_model=dict)
 async def update_reunio_field(id_reunio: int, field: str, value: str, db: Session = Depends(get_db)):
     data = {field: value}
     result = reunio.update_reunio_field(id_reunio, data, db)
     return result
 
-@app.delete("/reunions/del", response_model=dict)
+@app.delete("/delete_reunions/", response_model=dict)
 async def delete_reunio(id_reunio: int, db: Session = Depends(get_db)):
     result = reunio.delete_reunio(id_reunio, db)
     return result
 #-----------------------------final-taula-Reunio------------------------------------------------#
 
 #---------------------------------------taula-Participar--------------------------------------------------#
-@app.get("/get_participacions/", response_model=list[dict])
+@app.get("/participacions/", response_model=list[dict])
 async def read_participacions(db: Session = Depends(get_db)):
     return participar.get_all_participacions(db)
 
@@ -556,44 +558,44 @@ async def remove_participacio(id_empleat: int, id_reunio: int, id_proveidor: int
 
 #-----------------------------taula-Planificacio------------------------------------------------#
 @app.get("/planificacions/", response_model=list[dict])
-async def read_planificacions(db: Session = Depends(get_db)):
+async def get_all_planificacions(db: Session = Depends(get_db)):
     result = planificacio.get_all_planificacions(db)
     return result
 
 @app.get("/planificacions/{id_horari}", response_model=dict)
-async def read_planificacio_by_id(id_horari: int, db: Session = Depends(get_db)):
+async def get_planificacio(id_horari: int, db: Session = Depends(get_db)):
     result = planificacio.get_planificacio(id_horari, db)
     return result
 
-@app.post("/planificacions/", response_model=dict)
-async def create_planificacio(
+@app.post("/create_planificacions/", response_model=dict)
+async def add_new_planificacio(
     id_horari: int,
     data: str,
-    horari: int,
+    horari: str,
     rol: str,
-    empleatid: int,
+    id_empleat: int,
     db: Session = Depends(get_db)
 ):
     result = planificacio.add_new_planificacio(
-        id_horari, data, horari, rol, empleatid, db
+        id_horari, data, horari, rol, id_empleat, db
     )
     return result
 
-@app.put("/update_planificacio/", response_model=dict)
+@app.put("/update_planificacions/", response_model=dict)
 async def update_planificacio(
     id_horari: int,
     data: str,
-    horari: int,
+    horari: str,
     rol: str,
-    empleatid: int,
+    id_empleat: int,
     db: Session = Depends(get_db)
 ):
     result = planificacio.update_planificacio(
-        id_horari, data, horari, rol, empleatid, db
+        id_horari, data, horari, rol, id_empleat, db
     )
     return result
 
-@app.put("/update_planificacio_field/", response_model=dict)
+@app.put("/update_planificacions_field/", response_model=dict)
 async def update_planificacio_field(
     id_horari: int,
     field: str,
@@ -604,7 +606,7 @@ async def update_planificacio_field(
     result = planificacio.update_planificacio_field(id_horari, data, db)
     return result
 
-@app.delete("/planificacions/", response_model=dict)
+@app.delete("/delete_planificacions/", response_model=dict)
 async def delete_planificacio(id_horari: int, db: Session = Depends(get_db)):
     result = planificacio.delete_planificacio(id_horari, db)
     return result
