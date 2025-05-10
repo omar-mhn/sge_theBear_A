@@ -1,6 +1,8 @@
 from schema.clients_sch import clients_schema
 from sqlmodel import Session, select
 from models.Client import Client
+from typing import Optional
+
 
 #--------------------------------taula-Client--------------------------------------------------#
 def get_all_clients(db:Session):
@@ -13,14 +15,14 @@ def get_client(id_client:int, db:Session):
     client = db.exec(sql_read).one()
     return client.dict()
 
-def add_new_client(id_client:int, nom: str, email:str, telefon: str, db:Session):
+def add_new_client(id_client:int, nom: str, email: Optional[str], telefon:Optional[str], db:Session):
     db_client = Client(id_client=id_client, nom= nom, email=email, telefon=telefon)
     db.add(db_client)
     db.commit()
     db.refresh(db_client)
     return {"Missatge":"Client creat correctament"}
 
-def update_client(id_client:int, nom: str, email:str, telefon:str, db:Session):
+def update_client(id_client:int, nom: str, email: Optional[str], telefon:Optional[str], db:Session):
     sql_select = select(Client).where(Client.id_client == id_client)
     client_db = db.exec(sql_select).one()
 
