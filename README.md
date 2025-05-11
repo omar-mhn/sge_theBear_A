@@ -2,7 +2,7 @@
 
 ## Diagrama entidad - relación 
 
-![SGE_A_png.drawio.png](Capturas/MdoelE-R/SGE_A_png.drawio.png)
+![SGE_A_final.drawio.png](Capturas/MdoelE-R/SGE_A_png.drawio.png)
 
 # Captures del Swagger funcionant
 
