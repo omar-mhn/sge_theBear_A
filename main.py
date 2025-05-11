@@ -46,7 +46,7 @@ async def rget_coste(id_factura: int, db: Session = Depends(get_db)):
 @app.post("/create_costes/", response_model=dict)
 async def add_new_coste(id_factura: int, data: str, tipus_cost: str, cost_total: int, id_compra: int, id_empleat: int, id_comanda: int,  db: Session = Depends(get_db)):
     result = coste.add_new_coste(id_factura, data, tipus_cost, cost_total, id_compra, id_empleat, id_comanda, db)
-    return result
+    return {"coste":result}
 
 @app.put("/update_costes/", response_model=dict)
 async def update_coste(id_factura: int, data: str, tipus_cost: str, cost_total: int, id_compra: int, id_empleat: int, id_comanda: int, db: Session = Depends(get_db)):
@@ -204,10 +204,10 @@ async def create_producte(
     quantitat: int,
     nom_producte: str,
     id_proveidor: int,
-    id_prestatgeria: int,
+    id_estanteria: int,
     db: Session = Depends(get_db)
 ):
-    result = producte.add_new_producte(id_producte, cost, quantitat, nom_producte, id_proveidor, id_prestatgeria, db)
+    result = producte.add_new_producte(id_producte, cost, quantitat, nom_producte, id_proveidor, id_estanteria, db)
     return result
 
 @app.put("/update_productes/", response_model=dict)
@@ -217,10 +217,10 @@ async def update_producte(
     quantitat: int,
     nom_producte: str,
     id_proveidor: int,
-    id_prestatgeria: int,
+    id_estanteria: int,
     db: Session = Depends(get_db)
 ):
-    result = producte.update_producte(id_producte, cost, quantitat, nom_producte, id_proveidor, id_prestatgeria, db)
+    result = producte.update_producte(id_producte, cost, quantitat, nom_producte, id_proveidor, id_estanteria, db)
     return result
 
 @app.put("/update_productes_field/", response_model=dict)
