@@ -570,11 +570,11 @@ async def get_planificacio(id_horari: int, db: Session = Depends(get_db)):
 @app.post("/create_planificacions/", response_model=dict)
 async def add_new_planificacio(
     Dictionary: dict,
-    '''id_horari: int,
+    id_horari: int,
     data: str,
     horari: str,
     rol: str,
-    id_empleat: int,'''
+    id_empleat: int,
     db: Session = Depends(get_db)
 ):
     result = planificacio.add_new_planificacio(
