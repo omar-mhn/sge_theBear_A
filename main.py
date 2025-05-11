@@ -66,6 +66,130 @@ async def delete_coste(id_cost: int, db: Session = Depends(get_db)):
     result = coste.delete_coste(id_cost, db)
     return result
 #-----------------------------final-taula-Coste------------------------------------------------#
+<<<<<<< Updated upstream
+=======
+
+#--------------------------------MODULE-EMPLEATS--------------------------------------------------#
+@app.get("/read_all_empleats/", response_model= list[dict])
+async def read_empleat(db:Session = Depends(get_db)):
+    result = empleat.get_all_empleats(db)
+    return result
+
+@app.get("/empleats/{id_empleat}", response_model=dict)
+async def read_empleat_by_id(id_empleat: int, db: Session = Depends(get_db)):
+    return empleat.get_empleat(id_empleat, db)
+
+@app.post("/create_empleats/", response_model=dict)
+async def create_empleat(id_empleat:int, nom: str, email:str, telefon: str, adreca: str, rol: str, db:Session = Depends(get_db)):
+    result = empleat.add_new_empleat(id_empleat, nom, email, telefon, adreca, rol, db)
+    return result
+
+@app.put("/update_empleat/", response_model=dict)
+async def update_empleat(id_empleat:int, nom: str, email:str, telefon: str, adreca: str, rol: str, db:Session = Depends(get_db)):
+    result = empleat.update_empleat(id_empleat, nom, email, telefon, adreca, rol, db)
+    return result
+
+@app.patch("/empleats/{id_empleat}", response_model=dict)
+async def modify_empleat_field(id_empleat: int, field: str, value: str, db: Session = Depends(get_db)):
+    return empleat.update_empleat_field(id_empleat, {field: value}, db)
+
+@app.delete("/delete_empleat/", response_model=dict)
+async def delete_empleat(id_empleat:int, db:Session = Depends(get_db)):
+    result = empleat.delete_empleat(id_empleat, db)
+    return result
+
+#--------------------------------FINAL-MODULE-EMPLEATS---------------------------------------------------#
+
+#--------------------------------taula-Client--------------------------------------------------#
+@app.get("/clients/", response_model= list[dict])
+async def read_client(db:Session = Depends(get_db)):
+    result = client.get_all_clients(db)
+    return result
+
+@app.get("/clients/{id_client}", response_model=dict)
+async def read_client_by_id(id_client: int, db: Session = Depends(get_db)):
+    result = client.get_client(id_client, db)
+    return result
+
+@app.post("/clients/", response_model=dict)
+async def create_client(id_client:int, nom: str, email:str, telefon: str, db:Session = Depends(get_db)):
+    result = client.add_new_client(id_client, nom, email, telefon, db)
+    return result
+
+@app.put("/update_client/", response_model=dict)
+async def update_client(id_client:int, nom: str, email:str, telefon: str, db:Session = Depends(get_db)):
+    result = client.update_client(id_client, nom, email, telefon, db)
+    return result
+
+@app.put("/update_client_field/", response_model=dict)
+async def update_client_field(id_client: int, field: str, value: str, db: Session = Depends(get_db)):
+    data = {field: value}
+    result = client.update_client_field(id_client, data, db)
+    return result
+
+@app.delete("/clients/", response_model=dict)
+async def delete_client(id_client:int, db:Session = Depends(get_db)):
+    result = client.delete_client(id_client, db)
+    return result
+#-----------------------------final-taula-Client------------------------------------------------#
+
+#--------------------------------taula-Proveidor--------------------------------------------------#
+@app.get("/proveidors/", response_model=list[dict])
+async def read_proveidors(db: Session = Depends(get_db)):
+    result = proveidor.get_all_proveidors(db)
+    return result
+
+@app.get("/proveidors/{id_proveidor}", response_model=dict)
+async def read_proveidor_by_id(id_proveidor: int, db: Session = Depends(get_db)):
+    result = proveidor.get_proveidor(id_proveidor, db)
+    return result
+
+@app.post("/proveidors/create", response_model=dict)
+async def create_proveidor(
+    id_proveidor: int,
+    nom: str,
+    telefòn: str,
+    email: str,
+    informaciò: str,
+    db: Session = Depends(get_db)
+):
+    result = proveidor.add_new_proveidor(
+        id_proveidor, nom, telefòn, email, informaciò, db
+    )
+    return result
+
+@app.put("/update_proveidor/", response_model=dict)
+async def update_proveidor(
+    id_proveidor: int,
+    nom: str,
+    telefòn: str,
+    email: str,
+    informaciò: str,
+    db: Session = Depends(get_db)
+):
+    result = proveidor.update_proveidor(
+        id_proveidor, nom, telefòn, email, informaciò, db
+    )
+    return result
+
+@app.put("/update_proveidor_field/", response_model=dict)
+async def update_proveidor_field(
+    id_proveidor: int,
+    field: str,
+    value: str,
+    db: Session = Depends(get_db)
+):
+    data = {field: value}
+    result = proveidor.update_proveidor_field(id_proveidor, data, db)
+    return result
+
+@app.delete("/proveidors/", response_model=dict)
+async def delete_proveidor(id_proveidor: int, db: Session = Depends(get_db)):
+    result = proveidor.delete_proveidor(id_proveidor, db)
+    return result
+#-----------------------------final-taula-Proveidor------------------------------------------------#
+
+>>>>>>> Stashed changes
 #--------------------------------taula-Producte--------------------------------------------------#
 @app.get("/productes/", response_model=list[dict])
 async def read_productes(db: Session = Depends(get_db)):
