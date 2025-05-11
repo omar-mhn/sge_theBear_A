@@ -4,9 +4,9 @@
 
 ![SGE_A_png.drawio.png](Capturas/MdoelE-R/SGE_A_png.drawio.png)
 
-## Captures del Swagger funcionant
+# Captures del Swagger funcionant
 
-# Farem un exemple amb una de les taules del model, en aquest cas amb "Client". Començarem creant un registre amb l'endpoint POST:
+## Farem un exemple amb una de les taules del model, en aquest cas amb "Client". Començarem creant un registre amb l'endpoint POST:
 
 ![Client_Post.png](Capturas/Swagger/Client_Post.png)
 
@@ -41,7 +41,7 @@ I comprovem que s'hagi esborrat:
 
 Ara es mostraran la resta de taules en el mateix ordre de captures: crear, mostrar tot, mostrar per id, actualitzar tot i actualitzar el camp seleccionat, mostrar les dades actualitzades, esborrar i mostrar que s'ha esborrat satisfactòriament el registre.
 
-# Taula Planificació
+## Taula Planificació
 
 ![Planificacio_Post.png](Capturas/Swagger/Planificacio_Post.png)
 
@@ -59,7 +59,7 @@ Ara es mostraran la resta de taules en el mateix ordre de captures: crear, mostr
 
 ![Plani_despresDel.png](Capturas/Swagger/Plani_despresDel.png)
 
-# Taula Proveïdor
+## Taula Proveïdor
 
 ![Preveidor_Post.png](Capturas/Swagger/Preveidor_Post.png)
 
@@ -77,7 +77,7 @@ Ara es mostraran la resta de taules en el mateix ordre de captures: crear, mostr
 
 ![ProveidorDespresDel.png](Capturas/Swagger/ProveidorDespresDel.png)
 
-# Taula Reunió
+## Taula Reunió
 
 ![Reunio_Post.png](Capturas/Swagger/Reunio_Post.png)
 
@@ -95,7 +95,7 @@ Ara es mostraran la resta de taules en el mateix ordre de captures: crear, mostr
 
 ![Reunio_despresDel.png](Capturas/Swagger/Reunio_despresDel.png)
 
-# Taula Vendre
+## Taula Vendre
 
 ![Vendre_Post.png](Capturas/Swagger/Vendre_Post.png)
 
@@ -113,7 +113,7 @@ Ara es mostraran la resta de taules en el mateix ordre de captures: crear, mostr
 
 ![Vendre_despresDel.png](Capturas/Swagger/Vendre_despresDel.png)
 
-# Taula Empleat
+## Taula Empleat
 
 ![Empleat_Post.png](Capturas/Swagger/Empleat_Post.png)
 
@@ -127,7 +127,7 @@ Ara es mostraran la resta de taules en el mateix ordre de captures: crear, mostr
 
 ![Empleat_Del.png](Capturas/Swagger/Empleat_Del.png)
 
-# Taula Inventari
+## Taula Inventari
 
 ![Inventari_Post.png](Capturas/Swagger/Inventari_Post.png)
 
