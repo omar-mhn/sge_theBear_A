@@ -1,8 +1,8 @@
 # sge_theBear_A
 
-## Diagrama entidad - relación 
+## Diagrama entitat - relació 
 
-![SGE_A_final.drawio.png](Capturas/MdoelE-R/SGE_A_png.drawio.png)
+![SGE_A_final.drawio.png](Capturas/MdoelE-R/SGE_A_final.drawio.png)
 
 # Captures del Swagger funcionant
 
