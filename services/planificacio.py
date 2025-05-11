@@ -16,9 +16,9 @@ def get_planificacio(id_horari: int, db: Session):
 def add_new_planificacio(
     id_horari: int,
     data: str,
-    horari: int,
+    horari: str,
     rol: str,
-    empleatid: int,
+    id_empleat: int,
     db: Session
 ):
     db_planificacio = Planificacio(
@@ -26,7 +26,7 @@ def add_new_planificacio(
         data=data,
         horari=horari,
         rol=rol,
-        empleatid=empleatid
+        id_empleat=id_empleat
     )
     db.add(db_planificacio)
     db.commit()
@@ -36,9 +36,9 @@ def add_new_planificacio(
 def update_planificacio(
     id_horari: int,
     data: str,
-    horari: int,
+    horari: str,
     rol: str,
-    empleatid: int,
+    id_empleat: int,
     db: Session
 ):
     sql_select = select(Planificacio).where(Planificacio.id_horari == id_horari)
@@ -47,7 +47,7 @@ def update_planificacio(
     planificacio_db.data = data
     planificacio_db.horari = horari
     planificacio_db.rol = rol
-    planificacio_db.empleatid = empleatid
+    planificacio_db.id_empleat = id_empleat
 
     db.add(planificacio_db)
     db.commit()
