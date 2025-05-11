@@ -10,7 +10,7 @@ def get_all_costes(db: Session):
 def get_coste(id_factura: int, db: Session):
     sql_read = select(Coste).where(Coste.id_factura == id_factura)
     coste = db.exec(sql_read).one()
-    return costes_schema([coste])
+    return coste.dict()
 
 def add_new_coste(id_factura: int, data: str, tipus_cost: str, cost_total: int, id_compra: int, id_empleat: int, id_comanda: int, db: Session):
     db_coste = Coste(

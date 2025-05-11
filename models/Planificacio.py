@@ -4,7 +4,7 @@ from sqlmodel import SQLModel, Field
 class Planificacio(SQLModel, table=True):
     id_horari: int = Field(default=None, primary_key=True)
     data: str
-    horari: int
+    horari: str
     rol: str
-    empleatid: int = Field(default=None, foreign_key="empleat.empleatid")
+    id_empleat: int = Field(default=None, foreign_key="empleat.id_empleat")
 #-----------------------------final-taula-Planificacio--------------------------------------------------#
