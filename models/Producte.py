@@ -9,6 +9,6 @@ class Producte(SQLModel,table=True):
     quantitat : int
     nom_producte : str
     id_proveidor: int = Field(default=None, foreign_key="proveidor.id_proveidor")
-    id_prestatgeria: int  = Field(default=None, foreign_key="inventari.id_estanteria")
+    id_estanteria: int  = Field(default=None, foreign_key="inventari.id_estanteria")
 
 #-----------------------------final-taula-Producte--------------------------------------------------#
