@@ -141,7 +141,100 @@ Ara es mostraran la resta de taules en el mateix ordre de captures: crear, mostr
 
 ![Inventari_Del.png](Capturas/Swagger/Inventari_Del.png)
 
+## Taula Reserva
+![reserva_Post.png](Capturas/Swagger/reserva_Post.png)
 
+![reserva_GetAll.png](Capturas/Swagger/reserva_GetAll.png)
 
+![reserva_GetId.png](Capturas/Swagger/reserva_GetId.png)
 
+![reserva_Update.png](Capturas/Swagger/reserva_Update.png)
 
+![reserva_UpdateField.png](Capturas/Swagger/reserva_UpdateField.png)
+
+![reserva_abansDelete.png](Capturas/Swagger/reserva_abansDelete.png)
+
+![reserva_Del.png](Capturas/Swagger/reserva_Del.png)
+
+![reserva_despresDel.png](Capturas/Swagger/reserva_despresDel.png)
+
+## Taula Comanda 
+![comanda_Post.png](Capturas/Swagger/comanda_Post.png)
+
+![comanda_GetAll.png](Capturas/Swagger/comanda_GetAll.png)
+
+![comanda_GetId.png](Capturas/Swagger/comanda_GetId.png)
+
+![comanda_Update.png](Capturas/Swagger/comanda_Update.png)
+
+![comanda_UpdateField.png](Capturas/Swagger/comanda_UpdateField.png)
+
+![comanda_abansDelete.png](Capturas/Swagger/comanda_abansDelete.png)
+
+![comanda_Del.png](Capturas/Swagger/comanda_Del.png)
+
+![comanda_despresDel.png](Capturas/Swagger/comanda_despresDel.png)
+
+## Taula Coste 
+![coste_post.png](Capturas/Swagger/coste_post.png)
+
+![coste_GetAll.png](Capturas/Swagger/coste_GetAll.png)
+
+![coste_GetId.png](Capturas/Swagger/coste_GetId.png)
+
+![coste_Update.png](Capturas/Swagger/coste_Update.png)
+
+![coste_UpdateField.png](Capturas/Swagger/coste_UpdateField.png)
+
+![coste_abansDelete.png](Capturas/Swagger/coste_abansDelete.png)
+
+![coste_Del.png](Capturas/Swagger/coste_Del.png)
+
+![coste_despresDel.png](Capturas/Swagger/coste_despresDel.png)
+
+## Taula Participar 
+![participar_post.png](Capturas/Swagger/participar_post.png)
+
+![participar_GetAll.png](Capturas/Swagger/participar_GetAll.png)
+
+![participar_GetId.png](Capturas/Swagger/participar_GetId.png)
+
+![participar_abansDelete.png](Capturas/Swagger/participar_abansDelete.png)
+
+![participar_Del.png](Capturas/Swagger/participar_Del.png)
+
+![participar_despresDel.png](Capturas/Swagger/participar_despresDel.png)
+
+## Taula Producte 
+![producte_Post.png](Capturas/Swagger/producte_Post.png)
+
+![producte_GetAll.png](Capturas/Swagger/producte_GetAll.png)
+
+![producte_GetId.png](Capturas/Swagger/producte_GetId.png)
+
+![producte_Update.png](Capturas/Swagger/producte_Update.png)
+
+![producte_UpdateField.png](Capturas/Swagger/producte_UpdateField.png)
+
+![producte_abansDelete.png](Capturas/Swagger/producte_abansDelete.png)
+
+![producte_Del.png](Capturas/Swagger/producte_Del.png)
+
+![producte_despresDel.png](Capturas/Swagger/producte_despresDel.png)
+
+## Taula Producte_Final
+![producte_final_Post.png](Capturas/Swagger/producte_final_Post.png)
+
+![producte_final_GetAll.png](Capturas/Swagger/producte_final_GetAll.png)
+
+![producte_final_GetId.png](Capturas/Swagger/producte_final_GetId.png)
+
+![producte_final_Update.png](Capturas/Swagger/producte_final_Update.png)
+
+![producte_final_UpdateField.png](Capturas/Swagger/producte_final_UpdateField.png)
+
+![producte_final_abansDelete.png](Capturas/Swagger/producte_final_abansDelete.png)
+
+![producte_final_Del.png](Capturas/Swagger/producte_final_Del.png)
+
+![producte_final_despresDel.png](Capturas/Swagger/producte_final_despresDel.png)
